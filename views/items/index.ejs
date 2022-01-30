@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Items</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="container" style="margin-top: 50px;">
+
+    <% if (messages.success) { %>
+    <div class="alert alert-success" role="alert"><%- messages.success %></div>
+    <% } %>
+
+    <% if (messages.error) { %>
+    <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+    <% } %>
+
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-pills w-100">
+                <li class="nav-pill active">
+                    <a class="nav-link">Items</a>
+                </li>
+                <li class="nav-pill ml-auto">
+                    <a class="nav-link active" href="/items/add">Add Item</a>
+                </li>
+            </ul>
+        </div>
+    <div class="card-body">
+
+        <% if(data.length) { %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Item ID</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Cost Price</th>
+                    <th scope="col">Selling Price</th>
+                    <th scope="col">Selling Price With GST</th>
+                    <th scope="col">GST</th>
+                    <th width="200px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(var i = 0; i< data.length; i++) { %>
+                <tr>
+                    <!--<th scope="row"><%= (i+1) %></th>-->
+                    <td><%= data[i].itemid%></td>
+                    <td><%= data[i].itemname%></td>
+                    <td><%= data[i].stock%></td>
+                    <td><%= data[i].category%></td>
+                    <td><%= data[i].costprice%></td>
+                    <td><%= data[i].sellingprice%></td>
+                    <td><%= data[i].sellingpricegst%></td>
+                    <td><%= data[i].gst%></td>
+                    <td>
+                        <a class="btn btn-success edit" href="../items/edit/<%=data[i].itemid%>">Edit</a>
+                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../items/delete/<%=data[i].itemid%>">Delete</a>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <% } %>
+
+        <!-- if result is empty -->
+        <% if(!data.length) { %>
+            <p class="text-center">No item found!</p>
+        <% } %>
+
+        </div>
+    </div>
+
+</body>
+</html>

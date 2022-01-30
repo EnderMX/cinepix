@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/billing.css">
+  </head>
+  <body>
+    <% if (messages.error) { %>
+  	<div class="alert alert-danger" role="alert"><%- messages.error %></div>
+  	<% } %>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <div class="title-date">
+                <h2 class="title">INVOICE</h2>
+                <p class="date">21/01/22</p>
+            </div>
+            <div class="space"></div>
+            <p class="invoice-number">#08 279</p>
+        </div>
+        <div class="invoice-body">
+            <table>
+                <thead>
+                    <th style="padding-left:12px;">PRODUCT</th>
+                    <th>UNIT</th>
+                    <th>PRICE</th>
+                    <th>AMOUNT</th>
+                    <th style="text-align: right;">ACTION</th>
+                </thead>
+
+                <tbody id="table-body">
+                <form action="/items/billing" method="post">
+                <tr class="single-row">
+                    <td><input type="text" placeholder="Product name" class="product left" name="productname" value="<%= productname %>" ></td>
+                    <td><input type="number" placeholder="0" class="unit" name="unit" value="<%= unit %>" id="unit" onkeyup="getInput()"></td>
+                    <td><input type="number" placeholder="0" name="sellingprice" value="<%= sellingpricebill %>" class="price" id="price" onkeyup="getInput()"></td>
+                    <td><input type="number" placeholder="0" name="amount" value="<%= amount %>" class="amount" id="amount"></td>
+                    <td style="text-align: right;"><span class="material-icons">delete_outline</span></td>
+                </tr>
+
+                <tr style="padding-left: 20px">
+                    <td class="dashed "><div class="float">
+                        <a href="#" class="float" id="add-row">
+                            <span class="material-icons plus">add</span>
+                        </a>
+
+                    </div>
+                </td>
+                <td class="dashed ">
+                        <input type="submit" class="btn btn-info" value="Create Bill"/>
+                </td>
+                    <td class="dashed"></td>
+                    <td class="dashed"></td>
+                    <td class="dashed"></td>
+                    <td class="dashed"></td>
+                </tr>
+                </form>
+            </tbody>
+            </table>
+            <div id="sum"><input type="text" placeholder="0.00" name="total" class="total" id="total" disabled></div>
+
+        </div>
+    </div>
+
+    <script src="/javascripts/billing.js"></script>
+  </body>
+</html>
